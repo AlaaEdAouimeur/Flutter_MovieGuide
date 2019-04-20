@@ -5,7 +5,8 @@ class moviedetails extends StatelessWidget {
   final movies;
   Color orange = Color(0xFFB5444A);
   Color purpble = Color(0XFF942755);
-
+Color start =Color(0xFFf12711);
+Color end = Color(0xFFf5af19);
   var image_url = 'https://image.tmdb.org/t/p/w500/';
   moviedetails(this.movies);
   @override
@@ -27,7 +28,11 @@ class moviedetails extends StatelessWidget {
               margin: const EdgeInsets.all(20.0),
               child: Column(
                 children: <Widget>[
-                  Container(
+                 
+               Stack(
+                 
+                 children: <Widget>[
+                      Container(
                    child : Container(
                     alignment: Alignment.center,
                     child: Container(
@@ -50,6 +55,31 @@ class moviedetails extends StatelessWidget {
                   ),
                   
                   ),
+                InkWell(
+                  child: Container(
+                    width:55 ,
+                    height: 55,
+                   
+                   child: Icon(
+                     Icons.video_call,
+                     color: Colors.white,
+                   ),
+                 decoration: BoxDecoration(
+                      borderRadius: new BorderRadius.circular(180),
+                  gradient: LinearGradient(
+                    colors: [start,end],
+                    begin: const FractionalOffset(0.5, 0.0),
+                    end: const FractionalOffset(0.0, 0.5),
+                    stops: [0.0,1.0],
+                  )
+                 ),
+                    
+                  ),
+                )
+                 
+                 ],
+                 alignment: AlignmentDirectional.bottomEnd,
+               ),
                   new Container(
                     margin: const EdgeInsets.symmetric(
                         vertical: 20.0, horizontal: 0.0),
@@ -131,22 +161,3 @@ class moviedetails extends StatelessWidget {
   }
 }
 
-class myclipper extends CustomClipper<Path> {
-  @override
-  getClip(Size size) {
-    var tothird = (size.height) / 3;
-    var path = new Path();
-    path.lineTo(size.height, 0.0);
-    path.lineTo(0.0, size.width);
-
-    path.close();
-
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper oldClipper) {
-    // TODO: implement shouldReclip
-    return false;
-  }
-}
