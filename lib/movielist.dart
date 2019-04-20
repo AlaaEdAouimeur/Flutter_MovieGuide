@@ -21,7 +21,6 @@ class movielistState extends State<movielist> {
       Movies = data['results'];
     });
    
-    print(Movies.toString());
   }
 
   @override
