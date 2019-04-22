@@ -1,6 +1,12 @@
-# movie_guide
+### Movie Guide.
 
-A new Flutter project.
+# Flutter project. Based On TMDb Api's
+You Can Discover new Movies See the trailers and details About Them
+### ScreenShots
+![](assets/Screenshot_20190422-145059.jpg)
+![](assets/Screenshot_20190422-145103.jpg)
+![](assets/Screenshot_20190422-145126.jpg)
+![](assets/Screenshot_20190422-145313.jpg)
 
 ## Getting Started
 
