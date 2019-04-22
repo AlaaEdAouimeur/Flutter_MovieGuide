@@ -12,13 +12,15 @@ class moviedetails extends StatelessWidget {
   Color purpble = Color(0XFF942755);
   Color start = Color(0xFFff0084);
   Color end = Color(0xFF33001b);
-  
+  Color ystart = Color(0xFFBA8B02);
+  Color yend = Color(0xFF181818);
+
   var image_url = 'https://image.tmdb.org/t/p/w500/';
   moviedetails(this.movies);
- 
+
   @override
   Widget build(BuildContext context) {
-   var id =movies['id'];
+    var id = movies['id'];
     return Scaffold(
       body: Stack(
         fit: StackFit.expand,
@@ -59,13 +61,20 @@ class moviedetails extends StatelessWidget {
                               ]),
                         ),
                       ),
-                      InkWell(
+                     Row(
+                       
+      
+                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      
+                       children: <Widget>[
+                          InkWell(
                         child: Container(
-                          width: 55,
-                          height: 55,
+                          width: 50,
+                          height: 50,
                           child: Icon(
                             Icons.video_call,
                             color: Colors.white,
+
                           ),
                           decoration: BoxDecoration(
                               borderRadius: new BorderRadius.circular(180),
@@ -75,16 +84,41 @@ class moviedetails extends StatelessWidget {
                                 end: const FractionalOffset(0.0, 0.5),
                                 stops: [0.0, 1.0],
                               )),
-
                         ),
-                        onTap: (){
-                         
-                           gettrailer(movies['id']);
-                         
+                        onTap: () {
+                          gettrailer(movies['id']);
                         },
-                      )
+                      ),
+                      
+                        Container(
+                          width: 90,
+                          height: 20,
+                         
+                          decoration: BoxDecoration(
+                              borderRadius: new BorderRadius.circular(20),
+                              gradient: LinearGradient(
+                                colors: [start, end],
+                                begin: const FractionalOffset(0.5, 0.0),
+                                end: const FractionalOffset(0.0, 0.5),
+                                stops: [0.0, 1.0],
+                              )),
+                              child: Text(
+                                movies['release_date'],
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Arvo-Bold'
+                                ) ,
+                              ),
+                        ),
+                       
+                      
+                       ],
+                     )
+                   
                     ],
-                    alignment: AlignmentDirectional.bottomEnd,
+                    alignment: AlignmentDirectional.bottomCenter,
+                    
                   ),
                   new Container(
                     margin: const EdgeInsets.symmetric(
@@ -131,22 +165,21 @@ class moviedetails extends StatelessWidget {
                       new Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: InkWell(
-                             child: new Container(
-                            padding: const EdgeInsets.all(16.0),
-                            alignment: Alignment.center,
-                            child: new Icon(
-                              Icons.share,
-                              color: Colors.white,
+                            child: new Container(
+                              padding: const EdgeInsets.all(16.0),
+                              alignment: Alignment.center,
+                              child: new Icon(
+                                Icons.share,
+                                color: Colors.white,
+                              ),
+                              decoration: new BoxDecoration(
+                                  borderRadius: new BorderRadius.circular(10.0),
+                                  color: purpble),
                             ),
-                            decoration: new BoxDecoration(
-                                borderRadius: new BorderRadius.circular(10.0),
-                                color: purpble),
-                          ),
-                       onTap: (){
-                         Share.share('https://www.themoviedb.org/movie/$id');
-                       }
-                        ),
-
+                            onTap: () {
+                              Share.share(
+                                  'https://www.themoviedb.org/movie/$id');
+                            }),
                       ),
                       new Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -172,15 +205,15 @@ class moviedetails extends StatelessWidget {
     );
   }
 }
-Future gettrailer (var id) async{
-  var trailerurl =  'https://api.themoviedb.org/3/movie/$id/videos?api_key=1a293cbbabf99e68f7c2ae63f7e0fade&language=en-US';
-   http.Response response =await http.get(trailerurl);
-   Map data =json.decode(response.body);
-   List info = data['results'];
-   
 
+Future gettrailer(var id) async {
+  var trailerurl =
+      'https://api.themoviedb.org/3/movie/$id/videos?api_key=1a293cbbabf99e68f7c2ae63f7e0fade&language=en-US';
+  http.Response response = await http.get(trailerurl);
+  Map data = json.decode(response.body);
+  List info = data['results'];
 
-   var youtube = 'https://www.youtube.com/watch?v=${info[1]['key']}';
+  var youtube = 'https://www.youtube.com/watch?v=${info[1]['key']}';
   // return launch(youtube);
   return launch(youtube);
 }

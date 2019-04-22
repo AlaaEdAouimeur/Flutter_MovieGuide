@@ -15,7 +15,7 @@ class movielistState extends State<movielist> {
 
   Future getdata() async {
     http.Response response = await http.get(
-        'https://api.themoviedb.org/3/search/movie?api_key=1a293cbbabf99e68f7c2ae63f7e0fade&language=en-US&query=find&page=1&include_adult=false');
+        'https://api.themoviedb.org/3/discover/movie?api_key=1a293cbbabf99e68f7c2ae63f7e0fade&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1');
     data = json.decode(response.body);
     setState(() {
       Movies = data['results'];
