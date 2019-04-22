@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'movielist.dart';
+import 'searchbar.dart';
+
+
 
 void main() => runApp(MyApp());
 
@@ -9,6 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'MovieGuide.',
       home: home(),
+      
     );
   }
 }
@@ -23,7 +27,7 @@ class home extends StatefulWidget {
 class _homeState extends State<home> {
   
 Color orange =Color(0xFFB5444A);
-
+Color orange2 =Color(0xFFB5444A);
 Color deeppurple =Color(0xFFF17935);
 Color purpble = Color(0XFF942755);
 
@@ -41,7 +45,7 @@ Color end =Color(0xff2C5364);
         centerTitle: true,
         backgroundColor: start,
         leading: new Icon(
-          Icons.arrow_back,
+          Icons.menu,
           color: orange,
         ),
         title: new Text(
@@ -52,11 +56,23 @@ Color end =Color(0xff2C5364);
               fontWeight: FontWeight.bold),
         ),
         actions: <Widget>[
-          new Icon(
-            Icons.menu,
-            color: orange,
-            size: 30,
-          )
+          InkWell(
+               child: new Icon(
+              Icons.search,
+              color: orange2,
+              size: 30,
+            ),
+            onTap: (){
+             
+             Navigator.push(context, MaterialPageRoute(
+               builder: (context){
+                 return searchbar();
+               }
+             ));
+
+            },
+          ),
+       
         ],
       ),
       body: Padding(
@@ -111,3 +127,4 @@ Color purpble = Color(0XFF942755);
         );
   }
 }
+
